@@ -5,6 +5,32 @@ $sidebar-width: 280px;
     width: $sidebar-width;
     margin-left: -$sidebar-width;
     transition: margin-left .25s;
+    position: fixed;
+    top: 0;
+    //
+    .sidebar-link {
+        color: $dark;
+        display: block;
+        text-decoration: none;
+        &:hover {
+            color: $dark;
+            background-color: rgba($primary, 0.5);
+        }
+    }
+    .sidebar-link.active {
+        position: relative;
+        color: $dark;
+        background-color: rgba($primary, 0.5);
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 2px;
+            height: 100%;
+            width: 3px;
+            background: $primary;
+        }
+    }
 }
 .main {
     width: 100%;
@@ -13,6 +39,9 @@ $sidebar-width: 280px;
 .sidebar-toggled {
     .sidebar {
         margin-left: 0;
+    }
+    .main {
+        margin-left: $sidebar-width;
     }
 }
 
@@ -24,15 +53,17 @@ $sidebar-width: 280px;
     }
     .main {
         width: calc(100vw - #{$sidebar-width});
+        margin-left: $sidebar-width;
+        transition: margin-left .25s;
     }
-}
-// 展開
-.sidebar-toggled {
-    .sidebar {
-        margin-left: -$sidebar-width;
-    }
-    .main {
-        width: 100%;
-        margin-left: 0;
+    // 展開
+    .sidebar-toggled {
+        .sidebar {
+            margin-left: -$sidebar-width;
+        }
+        .main {
+            width: 100%;
+            margin-left: 0;
+        }
     }
 }
